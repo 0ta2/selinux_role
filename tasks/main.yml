@@ -1,0 +1,16 @@
+---
+- name: Check file /etc/selinux/config
+  stat:
+    path: /etc/selinux/config
+  register: selinux_config
+
+- name: Install tha libselinux-python package
+  yum:
+    name: libselinux-python
+    state: present
+  when: selinux_config.stat.exists
+
+- name: Update SELinux Policy
+  selinux:
+    state: "{{ selinux_role_selinuxstatus }}"
+  when: selinux_config.stat.exists

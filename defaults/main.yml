@@ -1,0 +1,6 @@
+---
+### 下記の3つから設定可能
+# disabled
+# enforcing
+# permissive
+selinux_role_selinuxstatus: disabled
