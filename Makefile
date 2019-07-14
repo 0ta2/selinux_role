@@ -21,6 +21,3 @@ create:
 
 converge:
 	@$(MOLECULE) $(DEBUG) converge --scenario-name $(DRIVER)
-
-echo:
-	echo $(MOLECULE) $(DEBUG) create --scenario-name $(DRIVER)
