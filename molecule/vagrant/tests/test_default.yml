@@ -1,0 +1,15 @@
+---
+{{ if or (eq .Env.ENVIRONMENT "production") (eq .Env.ENVIRONMENT "staging") }}
+file:
+  /etc/selinux/config:
+    exists: true
+    owner: root
+    group: root
+    mode: "0644"
+{{ end }}
+
+{{ if eq .Env.ENVIRONMENT "development" }}
+file:
+  /etc/selinux/config:
+    exists: false
+{{ end }}

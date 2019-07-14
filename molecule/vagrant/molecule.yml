@@ -1,6 +1,14 @@
 ---
+scenario:
+  name: vagrant
 driver:
   name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+  options:
+    config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
 platforms:
   - name: instance-1
     instance_raw_config_args:
@@ -11,9 +19,7 @@ platforms:
         type: dhcp
     config_options:
       synced_folder: true
-    box: debian/jessie64
-    box_version: 10.1
-    box_url: http://repo.example.com/images/postmerge/debian.json
+    box: centos/7
     memory: 1024
     cpus: 1
     provider_options:
@@ -23,3 +29,21 @@ platforms:
     provider_override_args:
       - "vm.synced_folder './', '/vagrant', disabled: true, type: 'nfs'"
     provision: true
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../shared/playbook.yml
+    prepare: ../shared/prepare.yml
+  config_options:
+    diff:
+      always: true
+  lint:
+    name: ansible-lint
+verifier:
+  name: goss
+  lint:
+    name: yamllint
+    options:
+      config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
+  additional_filer_or_dirs:
+    - ../shard/*

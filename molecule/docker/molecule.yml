@@ -1,0 +1,30 @@
+---
+scenario:
+  name: docker
+driver:
+  name: docker
+lint:
+  name: yamllint
+  options:
+    config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
+platforms:
+  - name: instance
+    image: centos:7
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../shared/playbook.yml
+    prepare: ../shared/prepare.yml
+  config_options:
+    diff:
+      always: true
+  lint:
+    name: ansible-lint
+verifier:
+  name: goss
+  lint:
+    name: yamllint
+    options:
+      config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
+  additional_filer_or_dirs:
+    - ../shard/*
