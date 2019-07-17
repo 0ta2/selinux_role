@@ -2,9 +2,9 @@
 # Makefile
 #
 
-DOCKROPTION := run --rm -it
-ENVFILE := ${PWD}/molecule/shared/.env.yml
-CONFIG := ${PWD}/molecule/docker/molecule.yml
+DOCKROPTION := run --rm -it --env ENVIRONMENT=development
+ENVFILE := ./molecule/shared/.env.yml
+CONFIG := ./molecule/docker/molecule.yml
 MOUNT1 := "${PWD}":/tmp/$(basename "${PWD}"):ro
 MOUNT2 := /var/run/docker.sock:/var/run/docker.sock
 WORKDIR := /tmp/$(basename "${PWD}")
@@ -20,3 +20,9 @@ create:
 
 converge:
 	@$(MOLECULE) $(DEBUG) converge --scenario-name docker
+
+login:
+	@$(MOLECULE) $(DEBUG) login --scenario-name docker
+
+verify:
+	@$(MOLECULE) $(DEBUG) verify --scenario-name docker
