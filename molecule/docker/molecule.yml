@@ -23,6 +23,8 @@ provisioner:
       always: true
   lint:
     name: ansible-lint
+  env:
+    ENVIRONMENT: ${ENVIRONMENT}
 verifier:
   name: goss
   lint:
