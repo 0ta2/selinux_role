@@ -10,23 +10,25 @@ lint:
 platforms:
   - name: instance
     image: centos:7
-    environment:
+    env:
       ENVIRONMENT: ${ENVIRONMENT}
 provisioner:
   name: ansible
   playbooks:
-    converge: ../shared/playbook.yml
-    prepare: ../shared/prepare.yml
+    converge: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/playbook.yml
+    verify: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/verify.yml
+    prepare: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/prepare.yml
   config_options:
     diff:
       always: true
   lint:
     name: ansible-lint
+  env:
+    ENVIRONMENT: ${ENVIRONMENT}
 verifier:
   name: goss
   lint:
     name: yamllint
     options:
       config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
-  additional_filer_or_dirs:
-    - ../shard/*
+  directory: ../shared/tests

@@ -34,8 +34,9 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../shared/playbook.yml
-    prepare: ../shared/prepare.yml
+    converge: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/playbook.yml
+    verify: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/playbook.yml
+    prepare: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/prepare.yml
   config_options:
     diff:
       always: true
@@ -49,5 +50,6 @@ verifier:
     name: yamllint
     options:
       config-file: ${MOLECULE_PROJECT_DIRECTORY}/molecule/shared/yaml-lint.yml
+  directory: ../shared/tests/
   additional_filer_or_dirs:
-    - ../shard/*
+    - ../shared/tests/*.yml
