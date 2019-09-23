@@ -1,19 +1,24 @@
+[![GitHub issues](https://img.shields.io/github/issues/0ta2/selinux-role)](https://github.com/0ta2/selinux-role/issues)
+[![GitHub stars](https://img.shields.io/github/stars/0ta2/selinux-role)](https://github.com/0ta2/selinux-role/stargazers)
+[![CircleCI](https://img.shields.io/circleci/build/github/0ta2/selinux-role/master)](https://circleci.com/gh/0ta2/selinux-role)
+[![Ansible Role](https://img.shields.io/ansible/role/43413)](https://galaxy.ansible.com/0ta2/selinux_role)
+
 selinux-role
 =========
 
-SELinux の設定を変更します｡
+Change SElinux settings.
 
 Requirements
 ------------
 
-SELinux を Ansible で変更する場合は､下記をホストにインストールする必要があります｡
+When changing SELinux with Ansible, the following must be installed on the host.
 
 - libselinux-python
 
 Role Variables
 --------------
 
-'selinux_role_selinuxstatus' の変数を変更して `SELinux` を設定してください｡
+Change the 'selinux_role_selinux_status' variable to set `SELinux`.
 
 - disabled
 - enforcing
@@ -22,4 +27,4 @@ Role Variables
 License
 -------
 
-BSD
+![GitHub](https://img.shields.io/github/license/0ta2/selinux-role)
