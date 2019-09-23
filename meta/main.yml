@@ -1,1 +1,19 @@
-# meta/main.yml
+---
+galaxy_info:
+  author: 0ta2
+  description: Setup SElinux
+
+  license: "license (MIT)"
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+
+  galaxy_tags:
+    - system
+    - selinux
+
+dependencies: []
