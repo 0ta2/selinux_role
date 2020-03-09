@@ -1,19 +1,22 @@
 ---
 galaxy_info:
   author: 0ta2
-  description: Setup SElinux
-
-  license: "license (MIT)"
-
-  min_ansible_version: 2.4
-
+  description: Setup Timezone
+  license: 'license (MIT)'
+  min_ansible_version: 2.9
   platforms:
     - name: EL
       versions:
         - 7
-
+        - 8
+    - name: Fedora
+      versions:
+        - 30
+        - 31
+    - name: Ubuntu
+      versions:
+        - eoan
+        - focal
   galaxy_tags:
     - system
     - selinux
-
-dependencies: []

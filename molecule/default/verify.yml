@@ -1,0 +1,32 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+  - name: Check file /etc/selinux/config
+    stat:
+      path: /etc/selinux/config
+    register: selinux_config
+
+  - name: Check Installed a libselinux-python package.
+    package_facts:
+      manager: auto
+
+  - name: Test if libselinux-python package is installed.
+    assert:
+      that:
+        - "'libselinux-python' in ansible_facts.packages"
+    when: selinux_config.stat.exists
+
+  - name: Check SELinux Policy.
+    shell: |
+      awk '/^SELINUX=/' /etc/selinux/config | cut -d= -f2
+    when: selinux_config.stat.exists
+    register: _check_selinux_policy
+
+  - name: Test if Selinux Policy.
+    assert:
+      that:
+        - selinux_role_selinuxstatus == _check_selinux_policy.stdout
+    when: selinux_config.stat.exists
