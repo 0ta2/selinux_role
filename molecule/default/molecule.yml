@@ -1,0 +1,14 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: ${MOLECULE_DISTRO:-centos:7}
+    privileged: True
+    command: /sbin/init
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
